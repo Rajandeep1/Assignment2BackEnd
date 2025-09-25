@@ -107,3 +107,27 @@ export const updateEmployee = async (
         next(error);
     };
 };
+
+/**
+ * this will handle requestto delete the employee.
+ * @param req express request object
+ * @param res express response object
+ * @param next to pass errors
+ */
+
+export const deleteEmployee = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+        const id: string = req.params.id;
+
+        await employeeService.deleteEmployee(Number(id));
+        res.status(HTTP_STATUS.OK).json({
+            message: "Employee data deleted successfully.",
+        });
+    } catch (error: unknown) {
+        next(error);
+    }
+};
