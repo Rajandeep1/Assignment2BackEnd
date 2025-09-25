@@ -25,7 +25,7 @@ app.get("/", (req: Request, res: Response ) => {
     res.send("hello world");
 });
 
-// adding endpoint
+// end point for healthdata
 // http://localhost:3000/api/v1/health
 app.get("/api/v1/health", (req: Request, res: Response) => {
     const healthData: HealthCheckResponse = {
