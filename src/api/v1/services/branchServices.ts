@@ -63,3 +63,20 @@ export const updateBranch = async (
 
 
 };
+
+
+/**
+ * this function will delete the branch
+ * @param id this will find the branch by id
+ * after finding the branch, it will delete the branch
+ * @throws error if branch id does not exist
+ */
+export const deleteBranch = async (id:number): Promise<void> => {
+    const index: number = branches.findIndex((b: Branches) => b.id === id);
+
+    if (index === -1) {
+        throw new Error(`Branch with ID ${id} not found`)
+    }
+
+    branches.splice(index,1);
+};
