@@ -77,3 +77,33 @@ export const createEmployee = async (
     }
 };
 
+
+/**
+ * this will handle the request to update the employee
+ * @param req express request object
+ * @param res express response object
+ * @param next to pass errors 
+ * the id will find the employee from the list and update it,
+ * if it didnt find the error it will throw error
+ */
+export const updateEmployee = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+
+        
+        const id: number = Number(req.params.id);
+        const { name, position, department, email, phone, branchId } = req.body;
+        const updatedEmployee: Employees = await employeeService.updateEmployee(id, { name, position, department, email, phone, branchId });
+
+        
+        res.status(HTTP_STATUS.OK).json({
+            message: "Employee data updated successfully",
+            data: updatedEmployee,
+        });
+    } catch (error: unknown) {
+        next(error);
+    };
+};
