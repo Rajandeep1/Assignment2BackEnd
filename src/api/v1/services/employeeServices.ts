@@ -44,3 +44,31 @@ export const createEmployee = async (createdEmployee: {
 
 
 };
+
+
+/**
+ * updatemployee function will update the employee data
+ * @param id this unique id will identify the employee to update the data
+ * @param employeeData fields that will be updated
+ * @returns Updated employee data
+ * @throws error if id is not found
+ */
+export const updateEmployee = async (
+    id: number,
+    employeeData: Pick<Employees, "name" | "position" | "department" | "email" | "phone" | "branchId"> 
+): Promise<Employees> => {
+    const index: number = employee.findIndex((emp: Employees) => emp.id === id);
+
+    if (index === -1) {
+        throw new Error(`Employee with ID ${id} not found`)
+    }
+
+    employee[index] = {
+        ...employee[index],
+        ...employeeData
+    };
+
+    return structuredClone(employee[index]);
+
+
+};
