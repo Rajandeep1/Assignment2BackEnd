@@ -36,3 +36,30 @@ export const createBranch = async (branchCreated: {
 
 
 };
+
+/**
+ * 
+ * @param id this will find the id to update the branch
+ * @param branchData this will update the fields of branch
+ * @returns 
+ */
+
+export const updateBranch = async (
+    id: number,
+    branchData: Pick<Branches, "name" | "address"| "phone"> 
+): Promise<Branches> => {
+    const index: number = branches.findIndex((branch: Branches) => branch.id === id);
+
+    if (index === -1) {
+        throw new Error(`Branch with ID ${id} is not found`)
+    }
+
+    branches[index] = {
+        ...branches[index],
+        ...branchData
+    };
+
+    return structuredClone(branches[index]);
+
+
+};
