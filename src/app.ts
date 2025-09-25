@@ -21,13 +21,13 @@ app.use(morgan("combined"));
 app.use(express.json());
 
 
-app.get("/", (req: Request, res: Response ) => {
+app.get("/", (_req: Request, res: Response ) => {
     res.send("hello world");
 });
 
 // end point for healthdata
 // http://localhost:3000/api/v1/health
-app.get("/api/v1/health", (req: Request, res: Response) => {
+app.get("/api/v1/health", (_req: Request, res: Response) => {
     const healthData: HealthCheckResponse = {
         status: "OK",
         uptime: process.uptime(),
