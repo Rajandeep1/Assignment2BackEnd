@@ -26,3 +26,21 @@ export const getAllBranches = async (
     }
 
 };
+
+export const deleteBranch = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+): Promise<void> => {
+    try {
+        const id: string = req.params.id;
+
+        await branchServices.deleteBranch(Number(id));
+        res.status(HTTP_STATUS.OK).json({
+            message: "Branch deleted successfully.",
+        });
+    } catch (error: unknown) {
+        next(error);
+    }
+};
+
