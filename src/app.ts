@@ -2,6 +2,8 @@ import express, { Express, Request, Response } from "express";
 // Importing morgan
 import morgan from "morgan";
 
+import employeeRoutes from "./api/v1/routes/employeeRoutes"
+
 // Use morgan for HTTP request logging
 
 
@@ -37,5 +39,7 @@ app.get("/api/v1/health", (_req: Request, res: Response) => {
 
     res.json(healthData)
 });
+
+app.use("/api/v1/employees", employeeRoutes)
 
 export default app;
