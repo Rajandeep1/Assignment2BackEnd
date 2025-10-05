@@ -177,7 +177,7 @@ describe("employee Controller", () => {
     
                 expect(mockRes.status).toHaveBeenCalledWith(HTTP_STATUS.OK);
                 expect(mockRes.json).toHaveBeenCalledWith({
-                message: "Employee data deleted successfully",
+                message: "Employee data deleted successfully.",
             });
         });
     });
