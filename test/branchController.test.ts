@@ -163,7 +163,7 @@ describe("branch Controller", () => {
 
             expect(mockRes.status).toHaveBeenCalledWith(HTTP_STATUS.OK);
             expect(mockRes.json).toHaveBeenCalledWith({
-            message: "Branch deleted successfully",
+            message: "Branch deleted successfully.",
         });
     });
 });
