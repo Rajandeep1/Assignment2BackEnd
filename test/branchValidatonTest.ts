@@ -41,5 +41,27 @@ describe("Validation Middleware", () => {
     expect(mockRes.status).not.toHaveBeenCalled();
  
     });
+
+    it("should pass validation for valid branch update data", () => {
+    // arrange
+    mockReq.params = { id: "333" };
+    mockReq.body = {
+        name: "University of Manitoba",
+        address: "Pembina Highway",
+        phone: "345-653-9991"
+    };
+ 
+    const middleware: MiddlewareFunction = validateRequest(
+        branchSchemas.update
+    );
+ 
+    // act
+    middleware(mockReq as Request, mockRes as Response, mockNext);
+ 
+    // assert
+    expect(mockNext).toHaveBeenCalled();
+    expect(mockRes.status).not.toHaveBeenCalled();
+   
+    });
 });
  
