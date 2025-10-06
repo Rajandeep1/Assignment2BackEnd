@@ -63,5 +63,21 @@ describe("Validation Middleware", () => {
     expect(mockRes.status).not.toHaveBeenCalled();
    
     });
+    it("should pass validation for valid branch delete request", () => {
+    // arrange
+    mockReq.params = { id: "123" };
+ 
+    const middleware: MiddlewareFunction = validateRequest(
+        branchSchemas.delete
+    );
+ 
+    // act
+    middleware(mockReq as Request, mockRes as Response, mockNext);
+ 
+    // assert
+    expect(mockNext).toHaveBeenCalled();
+    expect(mockRes.status).not.toHaveBeenCalled();
+    });
+ 
 });
  
