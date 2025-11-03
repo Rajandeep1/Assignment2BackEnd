@@ -1,6 +1,6 @@
 //interface for branches
 export interface Branches {
-    id: number,
+    id: string,
     name: string,
     address: string,
     phone: string,

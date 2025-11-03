@@ -1,6 +1,6 @@
 //interface for the employees
 export interface Employees {
-    id: number,
+    id: string,
     name: string,
     position: string,
     department: string,
