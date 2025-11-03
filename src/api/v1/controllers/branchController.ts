@@ -1,14 +1,15 @@
 import { Request, Response, NextFunction } from "express";
 import { HTTP_STATUS } from "../../../constants/httpConstants";
 import * as branchServices from "../services/branchServices";
-import { Branches } from "../../../models/branchModel"
+import { Branches } from "../../../models/branchModel";
+import { successResponse } from "../../../models/responseModel"
 
 
 /**
- * this will handle the request the retrieve branch records
- * @param req express request object
- * @param res express response object
- * @param next to pass errors
+ * Get all branches
+ * @param req - the express request
+ * @param res - the express response
+ * @param next - the express middleware chaining function
  */
 export const getAllBranches = async (
     _req: Request,
@@ -17,10 +18,9 @@ export const getAllBranches = async (
 ): Promise<void> => {
     try {
         const branch: Branches[] = await branchServices.getAllBranches();
-        res.status(HTTP_STATUS.OK).json({
-            message: "branches retrieved sucessfully",
-            data:branch,
-        });
+        res.status(HTTP_STATUS.OK).json(
+            successResponse(branch, "branches sucessfully retireved")
+        );
     } catch (error: unknown) {
         next(error)
     }
@@ -39,30 +39,15 @@ export const createBranch = async (
     next: NextFunction
 ): Promise<void> => {
     try{
-        if (!req.body.name) {
-            res.status(HTTP_STATUS.BAD_REQUEST).json({
-                message: "branch name is required"
-            });
-        } else if (!req.body.address) {
-            res.status(HTTP_STATUS.BAD_REQUEST).json({
-                message: "branch address is required "
-            });
-        } else if (!req.body.phone) {
-            res.status(HTTP_STATUS.BAD_REQUEST).json({
-                message: "branch phone is required"
-            });
-        } else{
             // extracting all of the fields (destructuring)
                 const {name, address, phone} = req.body;
             
-                const newEmployee: Branches = await branchServices.createBranch({name, address, phone});
-                res.status(HTTP_STATUS.CREATED).json({
-                    message: "Branch created successfully",
-                    data: newEmployee,
-                })
-        }
+                const newBranch: Branches = await branchServices.createBranch({name, address, phone});
+                res.status(HTTP_STATUS.CREATED).json(
+                    successResponse(newBranch, "Branch created successfully")
+                );
     } catch (error: unknown) {
-        next(error)
+        next(error);
     }
 };
 
@@ -80,51 +65,42 @@ export const updateBranch = async (
     next: NextFunction
 ): Promise<void> => {
     try{
-        if (Number.isNaN(Number(req.params.id))) {
-            res.status(HTTP_STATUS.BAD_REQUEST).json({
-                message:"Invalid ID number"
-            });
-        } else if (!req.body.name) {
-            res.status(HTTP_STATUS.BAD_REQUEST).json({
-                message:"Branch name is required"
-            });
-        } else if (!req.body.address) {
-            res.status(HTTP_STATUS.BAD_REQUEST).json({
-                message:"branch address is required"
-            });
-        } else if (!req.body.phone) {
-            res.status(HTTP_STATUS.BAD_REQUEST).json({
-                message:"Branch phone is required"
-            });
-        } else {
-            const id: number = Number(req.params.id)
+            const {id} = req.params
             // extracting all of the fields (destructuring)
             const {name, address, phone} = req.body;
 
             const updatedBranch: Branches = await branchServices.updateBranch(id,{name, address, phone});
-            res.status(HTTP_STATUS.OK).json({
-                message: "Branch updated successfully",
-                data: updatedBranch,
-            })
-        }
+            res.status(HTTP_STATUS.OK).json(
+                successResponse(updatedBranch, "Branch updated successfully")
+            );
     } catch (error: unknown) {
         next(error)
     }
 };
+
+
+
+
+/**
+ * delete branch
+ * @param req - the express request
+ * @param res - the express response
+ * @param next - the express middleware chaining function
+ */
+
 export const deleteBranch = async (
     req: Request,
     res: Response,
     next: NextFunction
 ): Promise<void> => {
     try {
-        const id: string = req.params.id;
+        const {id} = req.params;
 
-        await branchServices.deleteBranch(Number(id));
-        res.status(HTTP_STATUS.OK).json({
-            message: "Branch deleted successfully.",
-        });
+        await branchServices.deleteBranch(id);
+        res.status(HTTP_STATUS.OK).json(
+            successResponse( "branch deleted successfully")
+        );
     } catch (error: unknown) {
         next(error);
     }
 };
-
