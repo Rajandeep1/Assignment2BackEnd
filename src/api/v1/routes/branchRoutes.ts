@@ -3,6 +3,9 @@ import * as branchController from "../controllers/branchController";
 import { validateRequest } from "../middleware/validate";
 import { branchSchemas} from "../validation/branchValidation";
 
+
+////chnges made
+
 const router: Router = express.Router();
 // router for get all branches
 router.get("/",
