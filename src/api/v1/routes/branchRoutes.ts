@@ -112,7 +112,27 @@ router.put("/:id",
     branchController.updateBranch
 );
 
-// router for delete branch
+/**
+ * @openapi
+ * /branches/{id}:
+ *   delete:
+ *     summary: Delete a branch
+ *     tags: [Branches]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Branch ID
+ *     responses:
+ *       200:
+ *         description: Branch deleted successfully
+ *       404:
+ *         description: Branch not found
+ */
 router.delete("/:id",
     validateRequest(branchSchemas.delete),
     branchController.deleteBranch
