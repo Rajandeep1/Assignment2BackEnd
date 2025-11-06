@@ -33,6 +33,47 @@ router.get("/",
 );
 
 // router for create branch
+/**
+ * @openapi
+ * /branches:
+ *   post:
+ *     summary: Create a new branch
+ *     tags: [Branches]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - name
+ *               - address
+ *               - phone
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 example: "Downtown Branch"
+ *               address:
+ *                 type: string
+ *                 example: "123 Main Street, Winnipeg, MB"
+ *               phone:
+ *                 type: string
+ *                 example: "+1-111-999-0000"
+ *     responses:
+ *       201:
+ *         description: Branch created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Branch'
+ *       400:
+ *         description: Invalid input data
+ *       409:
+ *         description: Branch with this name already exists
+ */
+
 router.post("/", 
     validateRequest(branchSchemas.create),
     branchController.createBranch
