@@ -1,12 +1,16 @@
 import express, {Express, Request, Response } from "express";
+import helmet from "helmet";
+import dotenv from "dotenv";
+
 // imported morgan 
 import morgan from "morgan";
 // this is the import from the employee routes file
 import employeeRoutes from "./api/v1/routes/employeeRoutes"
 // this is the import from the branch routes file
 import branchRoutes from "./api/v1/routes/branchRoutes"
+import { getHelmetConfig } from "../config/helmetConfig";
 
-
+dotenv.config()
 const app: Express = express();
 
 // this is the health check interface for response
@@ -17,6 +21,10 @@ interface HealthCheckResponse {
     timestamp: string;
     version: string;
 }
+
+app.use(helmet());
+app.use(helmet(getHelmetConfig()));
+ 
 
 
 // Use morgan for HTTP request logging
