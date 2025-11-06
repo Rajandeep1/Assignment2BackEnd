@@ -6,6 +6,25 @@ import { employeeSchemas } from "../validation/employeeValidation";
 
 const router: Router = express.Router();
 
+/**
+ * @openapi
+ * /employees:
+ *   get:
+ *     summary: Retrieves a list of employees
+ *     tags: [Employees]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: A list of employees
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Employee'
+ */
+
 router.get("/",
     validateRequest(employeeSchemas.getAll),
     employeeController.getAllEmployees
