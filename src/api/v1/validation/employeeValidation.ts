@@ -1,4 +1,62 @@
 import Joi from "joi";
+
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     Employee:
+ *       type: object
+ *       required:
+ *         - id
+ *         - name
+ *         - position
+ *         - department
+ *         - email
+ *         - phone
+ *         - branchId
+ *         - createdAt
+ *         - updatedAt
+ *       properties:
+ *         id:
+ *           type: string
+ *           description: Unique identifier for the employee
+ *           example: "emp_001"
+ *         name:
+ *           type: string
+ *           description: Full name of the employee
+ *           example: "Kumar"
+ *         position:
+ *           type: string
+ *           description: Employee's job position or title
+ *           example: "business"
+ *         department:
+ *           type: string
+ *           description: Department where the employee works
+ *           example: "teacher"
+ *         email:
+ *           type: string
+ *           format: email
+ *           description: Employee’s official email address
+ *           example: "kumar@example.com"
+ *         phone:
+ *           type: string
+ *           description: Employee’s contact number
+ *           example: "+1-111-999-0000"
+ *         branchId:
+ *           type: string
+ *           description: The branch ID this employee belongs to
+ *           example: "branch_001"
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *           description: When the employee record was created
+ *           example: "2024-01-15T10:30:00Z"
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *           description: When the employee record was last updated
+ *           example: "2024-01-20T14:45:00Z"
+ */
  
 /**
 * Defines the Employee schema grouped by request category.
@@ -6,7 +64,7 @@ import Joi from "joi";
 * and conform to expected formats and business rules.
 */
 
- 
+
 export const employeeSchemas = {
 
     getAll: {
