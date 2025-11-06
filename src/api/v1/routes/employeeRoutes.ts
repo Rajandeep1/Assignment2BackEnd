@@ -91,6 +91,39 @@ router.post(
     employeeController.createEmployee
 );
 
+/**
+ * @openapi
+ * /employees/{id}:
+ *   put:
+ *     summary: Update an existing employee
+ *     tags: [Employees]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Employee ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Employee'
+ *     responses:
+ *       200:
+ *         description: Employee updated successfully
+ *       404:
+ *         description: Employee not found
+ */
+router.put(
+  "/:id",
+  validateRequest(employeeSchemas.update),
+  employeeController.updateEmployee
+);
+
 // router for update employee
 router.put("/:id",
     validateRequest(employeeSchemas.update),
