@@ -30,6 +30,60 @@ router.get("/",
     employeeController.getAllEmployees
 );
 
+/**
+ * @openapi
+ * /employees:
+ *   post:
+ *     summary: Create a new employee
+ *     tags: [Employees]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - name
+ *               - position
+ *               - department
+ *               - email
+ *               - phone
+ *               - branchId
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 example: "kumar"
+ *               position:
+ *                 type: string
+ *                 example: "teacher"
+ *               department:
+ *                 type: string
+ *                 example: "business"
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 example: "kumar@example.com"
+ *               phone:
+ *                 type: string
+ *                 example: "+1-204-555-0198"
+ *               branchId:
+ *                 type: string
+ *                 example: "b12345"
+ *     responses:
+ *       201:
+ *         description: Employee created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Employee'
+ *       400:
+ *         description: Invalid input data
+ *       409:
+ *         description: Employee with this email already exists
+ */
+
 // router for create employee
 router.post(
     "/",
