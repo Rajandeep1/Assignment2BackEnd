@@ -32,7 +32,6 @@ router.get("/",
     branchController.getAllBranches
 );
 
-// router for create branch
 /**
  * @openapi
  * /branches:
@@ -79,7 +78,35 @@ router.post("/",
     branchController.createBranch
 );
 
-// router for update branches
+
+/**
+ * @openapi
+ * /branches/{id}:
+ *   put:
+ *     summary: Update a branch's information
+ *     tags: [Branches]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Branch ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Branch'
+ *     responses:
+ *       200:
+ *         description: Branch updated successfully
+ *       404:
+ *         description: Branch not found
+ */
+
 router.put("/:id",
     validateRequest(branchSchemas.update), 
     branchController.updateBranch
