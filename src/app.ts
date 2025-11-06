@@ -1,6 +1,7 @@
 import express, {Express, Request, Response } from "express";
 import helmet from "helmet";
 import dotenv from "dotenv";
+import cors from "cors";
 
 // imported morgan 
 import morgan from "morgan";
@@ -9,6 +10,9 @@ import employeeRoutes from "./api/v1/routes/employeeRoutes"
 // this is the import from the branch routes file
 import branchRoutes from "./api/v1/routes/branchRoutes"
 import { getHelmetConfig } from "../config/helmetConfig";
+import { getCorsConfig } from "../config/corsConfig";
+import setupSwagger from "../config/swagger";
+
 
 dotenv.config()
 const app: Express = express();
@@ -24,7 +28,8 @@ interface HealthCheckResponse {
 
 app.use(helmet());
 app.use(helmet(getHelmetConfig()));
- 
+app.use(cors());
+app.use(cors(getCorsConfig()));
 
 
 // Use morgan for HTTP request logging
@@ -54,5 +59,6 @@ app.get("/api/v1/health", (_req: Request, res: Response) => {
 app.use("/api/v1/employees", employeeRoutes)
 app.use("/api/v1/branches", branchRoutes)
 
+setupSwagger(app);
 
 export default app;
