@@ -8,6 +8,8 @@ export const getCorsConfig = (): CorsOptions => {
         return {
             origin: true,
             credentials: true,
+            // Add maxAge for preflight caching (caches preflight responses for 1 hour to reduce server load and improve performance)
+        maxAge: 3600,
         } as CorsOptions;
     }
  

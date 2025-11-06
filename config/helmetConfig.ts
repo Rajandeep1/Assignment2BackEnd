@@ -10,6 +10,8 @@ export const getHelmetConfig = (): HelmetOptions => {
         // hidePoweredyBy: true,
         // always prevent MIME sniffing
         noSniff: true,
+        xssFilter: true,
+        // Disable DNS prefetching (not needed for APIs and reduces potential info leakage)
     };
  
     if (isDevelopment) {
