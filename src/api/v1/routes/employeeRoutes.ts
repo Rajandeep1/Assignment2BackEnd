@@ -130,6 +130,28 @@ router.put("/:id",
     employeeController.updateEmployee
 );
 
+/**
+ * @openapi
+ * /employees/{id}:
+ *   delete:
+ *     summary: Delete an employee
+ *     tags: [Employees]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Employee ID
+ *     responses:
+ *       200:
+ *         description: Employee deleted successfully
+ *       404:
+ *         description: Employee not found
+ */
+
 // router for delete employees
 router.delete("/:id",
     validateRequest(employeeSchemas.delete),
