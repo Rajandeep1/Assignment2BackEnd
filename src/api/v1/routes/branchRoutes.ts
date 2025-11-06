@@ -7,7 +7,26 @@ import { branchSchemas} from "../validation/branchValidation";
 ////chnges made
 
 const router: Router = express.Router();
-// router for get all branches
+
+/**
+ * @openapi
+ * /branches:
+ *   get:
+ *     summary: Retrieves a list of branches
+ *     tags: [Branches]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: A list of branches
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Branch'
+ */
+
 router.get("/",
     validateRequest(branchSchemas.getAll), 
     branchController.getAllBranches
